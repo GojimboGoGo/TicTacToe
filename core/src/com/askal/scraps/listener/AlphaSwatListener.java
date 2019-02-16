@@ -1,6 +1,6 @@
-package com.askal.scraps.action;
+package com.askal.scraps.listener;
 
-import com.badlogic.gdx.graphics.Color;
+import com.askal.scraps.actor.TileActor;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -16,7 +16,7 @@ public class AlphaSwatListener extends ClickListener {
         Actor thisActor = event.getListenerActor();
         float currentAlpha = thisActor.getColor().a;
         LOG.debug("enter: Received alpha of square: #{}", currentAlpha);
-        thisActor.getColor().a = Color.WHITE.a;
+//        thisActor.getColor().a = Color.WHITE.a;
         super.enter(event, x, y, pointer, fromActor);
     }
 
@@ -25,12 +25,19 @@ public class AlphaSwatListener extends ClickListener {
         Actor thisActor = event.getListenerActor();
         float currentAlpha = thisActor.getColor().a;
         LOG.debug("exit: Received alpha of square: #{}", currentAlpha);
-        thisActor.getColor().a = Color.CLEAR.a;
+//        thisActor.getColor().a = Color.CLEAR.a;
         super.exit(event, x, y, pointer, toActor);
     }
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
+
+        if (!(event.getListenerActor() instanceof TileActor)) {
+            throw new IllegalStateException("AlphaSwatListener: Not attached to tile!");
+        }
+
+        TileActor tile = (TileActor) event.getListenerActor();
+        tile.assignNextState();
         super.clicked(event, x, y);
     }
 }
