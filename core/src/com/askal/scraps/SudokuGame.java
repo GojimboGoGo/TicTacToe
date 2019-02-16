@@ -1,15 +1,23 @@
 package com.askal.scraps;
 
+import com.askal.scraps.action.AlphaSwatListener;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SudokuGame extends ApplicationAdapter {
+
+	private final static Logger LOG = LoggerFactory.getLogger(SudokuGame.class);
 
 	private Stage stage;
 
@@ -35,16 +43,19 @@ public class SudokuGame extends ApplicationAdapter {
 				int innerYOffset = yOffset + j/3 * 66;
 				gridTiles[i][j].setPosition(innerXOffset, innerYOffset);
 				gridTiles[i][j].setColor(Color.CLEAR);
+				gridTiles[i][j].addListener(new AlphaSwatListener());
+				gridTiles[i][j].setTouchable(Touchable.enabled);
+				LOG.info("Adding tile ({}, {})", i, j);
 				stage.addActor(gridTiles[i][j]);
 			}
 		}
-		gridTiles[0][0].setColor(Color.WHITE);
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.input.setInputProcessor(stage);
 		stage.act();
 		stage.draw();
 	}
