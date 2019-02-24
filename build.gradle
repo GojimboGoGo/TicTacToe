@@ -61,10 +61,6 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-        // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-        // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-        compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
 
     }
 }

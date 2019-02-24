@@ -1,15 +1,15 @@
 package com.askal.scraps.desktop;
 
+import com.askal.scraps.SetupGame;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.askal.scraps.SudokuGame;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Sudoku";
-		config.height = 600;
-		config.width = 600;
-		new LwjglApplication(new SudokuGame(), config);
-	}
+    public static void main(String[] arg) {
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.title = "Tic Tac Toe";
+        config.height = 230;
+        config.width = 230;
+        new LwjglApplication(new SetupGame(), config);
+    }
 }
