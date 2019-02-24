@@ -1,17 +1,19 @@
 package com.askal.scraps;
 
 import com.askal.scraps.actor.TileActor;
-import com.askal.scraps.controller.BasicGameState;
+import com.askal.scraps.controller.DummyGameState;
+import com.askal.scraps.controller.TicTacToeGameState;
 import com.askal.scraps.controller.GameState;
+import com.askal.scraps.reference.Player;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class SetupGame extends ApplicationAdapter {
@@ -43,7 +45,6 @@ public class SetupGame extends ApplicationAdapter {
     }
 
     private void buildTicTacToeTiles() {
-        // Grid taken courtesy of http://www.kidsmathgamesonline.com/sudoku/printableworksheets/template.html
         Texture texture = new Texture(Gdx.files.internal("data/board tictactoe.png"));
         Image borderImage = new Image();
         borderImage.setPosition(0, 0);
@@ -54,9 +55,9 @@ public class SetupGame extends ApplicationAdapter {
         gridImage.setPosition(15, 15);
 
         stage.addActor(gridImage);
-        GameState gameState = new BasicGameState();
 
-        Image[] gridTiles = new Image[9];
+        TileActor[] gridTiles = new TileActor[9];
+        GameState gameState = new TicTacToeGameState(gridTiles);
         for (int i = 0; i < 9; i++) {
             int xPosition = 16 + i % 3 * 66;
             int yPosition = 16 + i / 3 * 66;
@@ -73,9 +74,9 @@ public class SetupGame extends ApplicationAdapter {
         Image gridImage = new Image(texture);
         gridImage.setPosition(0, 0);
         stage.addActor(gridImage);
-        GameState gameState = new BasicGameState();
 
         Image[][] gridTiles = new Image[9][];
+        GameState gameState = new DummyGameState();
         for (int i = 0; i < 9; i++) {
             gridTiles[i] = new Image[9];
 

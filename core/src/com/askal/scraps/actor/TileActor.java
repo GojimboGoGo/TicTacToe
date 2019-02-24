@@ -2,12 +2,12 @@ package com.askal.scraps.actor;
 
 import com.askal.scraps.controller.GameState;
 import com.askal.scraps.listener.AlphaSwatListener;
+import com.askal.scraps.listener.ResetListener;
 import com.askal.scraps.reference.Player;
 import com.askal.scraps.reference.TileState;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.utils.Scaling;
 
 public class TileActor extends Image {
 
@@ -19,12 +19,13 @@ public class TileActor extends Image {
     }
 
     public TileActor(float x, float y, TileState tileState, GameState gameState) {
-        super(tileState.getTileDrawable(), Scaling.none);
+        super(tileState.getTileDrawable());
         this.setTileState(tileState);
         this.gameState = gameState;
         this.setPosition(x, y);
         this.setColor(1, 1, 1, 1);
         this.addListener(new AlphaSwatListener(gameState));
+        this.addListener(new ResetListener(gameState));
 
         Gdx.app.debug("Create", "Finished construction");
     }
@@ -62,7 +63,7 @@ public class TileActor extends Image {
         Gdx.app.debug("Tile", "assignNextState: New state " + this.tileState);
     }
 
-    protected void setTileState(TileState newState) {
+    public void setTileState(TileState newState) {
         this.tileState = newState;
         this.setDrawable(this.tileState.getTileDrawable());
         Gdx.app.debug("Tile", "Assigned new drawable");
