@@ -1,6 +1,5 @@
 package com.askal.scraps.listener;
 
-import com.askal.scraps.actor.TileActor;
 import com.askal.scraps.controller.GameState;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
